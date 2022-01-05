@@ -1,4 +1,6 @@
 #!/bin/bash
+echo Content-type: text/html
+echo
 echo "
     <!doctype html>
     <html lang="en">
@@ -29,7 +31,7 @@ echo "
             </style>
             
             <!-- Custom styles for this template -->
-            <link href="./css/sign_in.css" rel="stylesheet">
+            <link href="./css/login.css" rel="stylesheet">
         </head>
         <body class="text-center">
             <main class="form-signin">
@@ -38,10 +40,10 @@ echo "
                     <h1 class="h3 fw-normal">Sign in</h1>
 
                     <div class="form-floating mb-3">
-                        <input id="username" type="text" class="form-control" id="floatingInput" placeholder="Username">
+                        <input id="username" name="username" type="text" class="form-control" id="floatingInput" placeholder="Username">
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input id="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     </div>
 
                     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>

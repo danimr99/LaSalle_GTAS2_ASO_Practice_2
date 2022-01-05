@@ -4,9 +4,21 @@ body {
 }
 
 body {
-  display: flex;
-  align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
+
+.username-text {
+  color: blue;
+  font-weight: bold;
+}
+
+.container {
+  width: 100%;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

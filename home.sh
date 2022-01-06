@@ -35,6 +35,13 @@ else
     passwordOk=false
 fi
 
+# Check if user is sudoer (Privileges of role)
+if getent group sudo | grep -q "\b${username}\b"; then 
+    isSudoer=true
+else 
+    isSudoer=false
+fi
+
 # Check if login has been successful
 if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
     html='
@@ -60,7 +67,7 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                 <div class="row text-center">
                     <div class="username-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
                         <h1 class="display-4">Welcome back, <span class="username-text">'$username'</span></h1>
-                        <p class="lead">Select an option to start managing your system.</p>
+                        <p class="lead">Select an option to start managing your system</p>
                     </div>
                 </div>
 
@@ -127,12 +134,20 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                     <button type="button" class="btn btn-secondary center-text" onclick="logOut()">
                         <i class="bi bi-box-arrow-left"></i> Log Out
                     </button>
-                    <button type="button" class="btn btn-danger center-text" onclick="powerOff()">
-                        <i class="bi bi-power"></i> Power Off
-                    </button>
-                    <button type="button" class="btn btn-warning center-text" onclick="restart()">
-                        <i class="bi bi-arrow-clockwise"></i> Restart
-                    </button>
+                    '
+
+                    if [ "${isSudoer}" == true ]; then
+                        html+='
+                            <button type="button" class="btn btn-warning center-text" onclick="restart()">
+                                <i class="bi bi-arrow-clockwise"></i> Restart
+                            </button>
+                            <button type="button" class="btn btn-danger center-text" onclick="powerOff()">
+                                <i class="bi bi-power"></i> Power Off
+                            </button>
+                            '
+                    fi
+                
+                html+='
                 </div>
                 
                 <script>
@@ -209,13 +224,6 @@ else
             </body>
         </html>
     '
-fi
-
-# Check if user is sudoer (Privileges of role)
-if getent group sudo | grep -q "\b${username}\b"; then 
-    isSudoer=true
-else 
-    isSudoer=false
 fi
 
 

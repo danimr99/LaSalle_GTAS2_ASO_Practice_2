@@ -26,6 +26,9 @@ if id "${username}" &>/dev/null; then
     # Check if passwords are the same 
     if [ "${shadowPassword}" == "${encryptedPassword}" ]; then
         passwordOk=true
+
+        # Store username to a file
+        echo "${username}" > "./data/username.txt"
     else
         passwordOk=false
     fi
@@ -35,7 +38,7 @@ else
     passwordOk=false
 fi
 
-# Check if user is sudoer (Privileges of role)
+# Check if user is sudoer 
 if getent group sudo | grep -q "\b${username}\b"; then 
     isSudoer=true
 else 
@@ -61,11 +64,11 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"/>
 
                 <!-- Custom styles for this template -->
-                <link href="./css/home.css" rel="stylesheet">
+                <link href="./css/style.css" rel="stylesheet">
             </head>
             <body>
                 <div class="row text-center">
-                    <div class="username-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
                         <h1 class="display-4">Welcome back, <span class="username-text">'$username'</span></h1>
                         <p class="lead">Select an option to start managing your system</p>
                     </div>
@@ -79,7 +82,7 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                             </div>
                             <div class="card-body">
                                 <img class="mb-4" src="./images/process.png" alt="" width="75" height="75">
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Select</button>
+                                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="processes()">Select</button>
                             </div>
                         </div>
                         <div class="card mb-4 box-shadow">
@@ -151,6 +154,10 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                 </div>
                 
                 <script>
+                    function processes() {
+                        location.replace("processes.sh");
+                    }
+
                     function logOut() {
                         location.replace("login.sh");
                     }

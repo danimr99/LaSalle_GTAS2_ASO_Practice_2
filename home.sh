@@ -91,7 +91,7 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                             </div>
                             <div class="card-body">
                                 <img class="mb-4" src="./images/monitor.png" alt="" width="75" height="75">
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Select</button>
+                                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="monitoring()">Select</button>
                             </div>
                         </div>
                         <div class="card mb-4 box-shadow">
@@ -156,6 +156,10 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                 <script>
                     function processes() {
                         location.replace("processes.sh");
+                    }
+
+                    function monitoring() {
+                        location.replace("monitoring.sh");
                     }
 
                     function logOut() {

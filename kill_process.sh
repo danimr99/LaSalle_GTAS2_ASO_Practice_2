@@ -6,6 +6,11 @@ pid=$(cat /var/www/cgi-bin/data/process.txt)
 # Kill process with the specified PID
 sudo kill -9 ${pid}
 
+# Log action to file
+now=$(date)
+username=$(cat /var/www/cgi-bin/data/username.txt)
+echo "User ${username} has killed PID ${pid} [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 echo Content-type: text/html
 echo
 echo '

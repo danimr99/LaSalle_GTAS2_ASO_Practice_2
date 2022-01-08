@@ -20,6 +20,11 @@ else
 fi
 
 
+# Log action to file
+now=$(date)
+echo "User ${username} listed all the details for the PID ${inputPID} [${now}]" >> /var/www/cgi-bin/data/log.txt
+
+
 echo Content-type: text/html
 echo
 echo '

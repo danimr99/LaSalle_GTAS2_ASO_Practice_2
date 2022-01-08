@@ -9,6 +9,13 @@ inputUsername=$(echo ${post} | awk -F '=| ' '{print $2}')
 # Add user with specified data
 sudo userdel ${inputUsername}
 
+
+# Log action to file
+now=$(date)
+username=$(cat /var/www/cgi-bin/data/username.txt)
+echo "User ${username} has deleted user called ${inputUsername} [${now}]" >> /var/www/cgi-bin/data/log.txt
+
+
 echo Content-type: text/html
 echo
 echo '

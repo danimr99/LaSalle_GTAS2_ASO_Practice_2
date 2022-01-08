@@ -13,6 +13,11 @@ inputPassword=$(echo ${post} | awk -F '=| ' '{print $3}')
 sudo useradd ${inputUsername}
 sudo passwd ${inputPassword}
 
+# Log action to file
+now=$(date)
+username=$(cat /var/www/cgi-bin/data/username.txt)
+echo "User ${username} has created a new user called ${inputUsername} [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 echo Content-type: text/html
 echo
 echo '

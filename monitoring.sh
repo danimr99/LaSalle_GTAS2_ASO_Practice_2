@@ -6,8 +6,10 @@ cpu=$(cat /proc/stat |grep cpu |tail -1|awk '{ print ($5*100)/($2+$3+$4+$5+$6+$7
 memory=$(free -m | awk 'NR==2{ print $3*100/$2 }')
 disk=$(df -h | awk '$NF=="/"{ printf $3/$2*100 }')
 
-# Get last 10 access logs to the server
-#logs=$(sudo tail -10 /var/log/apache2/access.log)
+# Log action to file
+now=$(date)
+username=$(cat /var/www/cgi-bin/data/username.txt)
+echo "User ${username} has displayed resources statistics [${now}]" >> /var/www/cgi-bin/data/log.txt
 
 
 echo Content-type: text/html

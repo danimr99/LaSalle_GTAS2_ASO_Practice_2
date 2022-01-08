@@ -10,6 +10,10 @@ echo " " >> /var/www/cgi-bin/data/mycron.txt
 sudo crontab -u ${username} /var/www/cgi-bin/data/mycron.txt
 sudo rm /var/www/cgi-bin/data/mycron.txt
 
+# Log list of tasks to file
+now=$(date)
+echo "User ${username} has deleted all his/her tasks [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 
 echo Content-type: text/html
 echo

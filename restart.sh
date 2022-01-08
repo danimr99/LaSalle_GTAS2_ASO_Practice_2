@@ -1,4 +1,11 @@
 #!/bin/bash
+
+
+# Log action to file
+now=$(date)
+username=$(cat /var/www/cgi-bin/data/username.txt)
+echo "User ${username} has restarted the system [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 echo Content-type: text/html
 echo
 echo '

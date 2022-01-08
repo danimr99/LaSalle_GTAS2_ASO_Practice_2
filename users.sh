@@ -10,6 +10,9 @@ else
     isSudoer=false
 fi
 
+# Log action to file
+now=$(date)
+echo "User ${username} has listed all users [${now}]" >> /var/www/cgi-bin/data/log.txt
 
 echo Content-type: text/html
 echo

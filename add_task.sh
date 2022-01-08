@@ -58,6 +58,9 @@ echo ${command_string} >> /var/www/cgi-bin/data/mycron.txt
 sudo crontab -u ${username} /var/www/cgi-bin/data/mycron.txt
 sudo rm /var/www/cgi-bin/data/mycron.txt
 
+# Log action to file
+now=$(date)
+echo "User ${username} has scheduled a new task [${now}]" >> /var/www/cgi-bin/data/log.txt
 
 
 echo Content-type: text/html

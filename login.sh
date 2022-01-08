@@ -1,4 +1,11 @@
 #!/bin/bash
+
+
+# Log action to file
+now=$(date)
+echo "A client has connected [${now}]" >> /var/www/cgi-bin/data/log.txt
+
+
 echo Content-type: text/html
 echo
 echo "

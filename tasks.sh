@@ -13,6 +13,10 @@ fi
 # Get crontab output of the user logged in to check if there are tasks programmed by the user
 crontab_output=$(sudo crontab -u ${username} -l 2>&1)
 
+# Log list of tasks to file
+now=$(date)
+echo "User ${username} has listed all tasks [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 echo Content-type: text/html
 echo
 echo '

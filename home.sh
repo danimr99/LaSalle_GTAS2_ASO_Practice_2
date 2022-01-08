@@ -9,6 +9,10 @@ username=$(echo ${post} | awk -F '=|&' '{print $2}')
 # Get password from POST
 password=$(echo ${post} | awk -F '=| ' '{print $3}')
 
+# Log action to file
+now=$(date)
+echo "User ${username} has logged in [${now}]" >> /var/www/cgi-bin/data/log.txt
+
 # Check if exists the username introduced by the user
 if id "${username}" &>/dev/null; then
     existsUser=true

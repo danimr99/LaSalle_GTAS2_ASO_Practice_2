@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Get username of the user logged in
+username=$(cat /var/www/cgi-bin/data/username.txt)
+
+# Echo new cron into cron file
+echo " " >> /var/www/cgi-bin/data/mycron.txt
+
+# Update all tasks and delete temp file
+sudo crontab -u ${username} /var/www/cgi-bin/data/mycron.txt
+sudo rm /var/www/cgi-bin/data/mycron.txt
+
 
 echo Content-type: text/html
 echo
@@ -20,21 +30,12 @@ echo '
             <link href="./css/power.css" rel="stylesheet">
         </head>
         <body class="text-center">
-            <!-- Header -->
-            <h1 class="center">Delete User</h1>
-
-            <div class="container center-text w-50">
-                <form style="margin: 5%;" action="remove_user.sh" method="POST">
-                    <div class="mb-3 ">
-                        <label for="inputUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="inputUsername" name="inputUsername" aria-describedby="inputUsername" placeholder="Username">
-                    </div>
-                    
-                    <button type="submit" class="btn btn-danger center-text">Remove</button>
-                    <button type="button" class="btn btn-primary center-text" onclick="logOut()">Exit</button>
-                </form>
+            <div class="row text-center">
+                <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4">All tasks programmed for '${username}' have been successfully deleted!</h1>
+                </div>
             </div>
-            
+            <button type="button" class="btn btn-primary center-text" onclick="logOut()">Exit</button>          
         
             <script>
                 function logOut() {

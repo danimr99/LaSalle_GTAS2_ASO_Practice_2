@@ -127,7 +127,7 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
                             </div>
                             <div class="card-body">
                                 <img class="mb-4" src="./images/tasks.png" alt="" width="75" height="75">
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Select</button>
+                                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="tasks()">Select</button>
                             </div>
                         </div>
                     </div>
@@ -164,6 +164,10 @@ if [ "${existsUser}" == true ] && [ "${passwordOk}" == true ]; then
 
                     function users() {
                         location.replace("users.sh");
+                    }
+
+                    function tasks() {
+                        location.replace("tasks.sh");
                     }
 
                     function logOut() {

@@ -20,6 +20,9 @@ echo '
             <link href="./css/power.css" rel="stylesheet">
         </head>
         <body class="text-center">
+            <!-- Header -->
+            <h1 class="center">Create User</h1>
+
             <div class="container center-text w-50">
                 <form style="margin: 5%;" action="add_user.sh" method="POST">
                     <div class="mb-3 ">

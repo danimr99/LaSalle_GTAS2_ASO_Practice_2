@@ -6,6 +6,10 @@ cpu=$(cat /proc/stat |grep cpu |tail -1|awk '{ print ($5*100)/($2+$3+$4+$5+$6+$7
 memory=$(free -m | awk 'NR==2{ print $3*100/$2 }')
 disk=$(df -h | awk '$NF=="/"{ printf $3/$2*100 }')
 
+# Get last 10 access logs to the server
+#logs=$(sudo tail -10 /var/log/apache2/access.log)
+
+
 echo Content-type: text/html
 echo
 echo '
@@ -62,6 +66,36 @@ echo '
 
             <!-- Gauges -->
             <div id="chart_div" style="width: 800px; height: 240px; text-align: center; margin: 0 auto;"></div>
+
+            <br><br>
+
+            <!-- Access log -->
+            <div class="row w-100 text-center">
+                <h1 class="center">Access Log</h1>
+            </div>
+            <br>
+            <div class="container">
+                <ul class="list-group">
+                '
+                # Count lines of access log file
+                linesCounter=`sudo cat /var/log/apache2/access.log | wc -l`
+
+                # Read last 10 access logs to the server
+                counter=10
+                while [ $counter -gt 0 ] 
+                do
+                    index=$(($linesCounter - $counter))
+
+                    line=`sudo cat /var/log/apache2/access.log | awk FNR==${index}`
+
+                    echo '<li class="list-group-item">'${line}'</li>'
+
+                    counter=$(($counter - 1))
+                done
+                
+                echo '
+                </ul>
+            </div>
 
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
